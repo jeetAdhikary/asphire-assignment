@@ -1,7 +1,7 @@
 import { GetterTree, MutationTree, ActionTree } from 'vuex'
 import RootState from '@/store/types'
 
-import { ApplyLoanState } from './types'
+import { ApplyLoanState, LoadFieldPayload } from './types'
 import { createLoan } from '@/service'
 import { generateLoanData } from '@/utils/loan'
 
@@ -33,6 +33,7 @@ const actions: Actions = {
     try {
       const requestPayload = generateLoanData(state.fields)
       if (requestPayload) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const res = await createLoan(requestPayload)
         console.log(requestPayload)
       }
@@ -43,7 +44,7 @@ const actions: Actions = {
   },
 }
 const mutations: Mutations = {
-  APPLY_LOAN_FIELD_UPDATE(state, payload) {
+  APPLY_LOAN_FIELD_UPDATE(state, payload: LoadFieldPayload) {
     state.fields[payload.name] = payload.value
   },
   APPLY_LOAN_REQUEST(state) {

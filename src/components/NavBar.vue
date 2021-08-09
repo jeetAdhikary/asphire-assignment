@@ -89,6 +89,7 @@ import {
 } from '@heroicons/vue/solid'
 export default defineComponent({
   name: 'NavBar',
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(_, ctx) {
     const navData = ref<Array<NavbarData>>([
       {

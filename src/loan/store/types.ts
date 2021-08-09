@@ -17,3 +17,8 @@ export interface LoanListState {
   lists: Array<LoanData>
   sendStatus: SendStatus
 }
+
+export interface LoadFieldPayload {
+  name: keyof ApplyLoanField
+  value: number & OptionsData
+}
