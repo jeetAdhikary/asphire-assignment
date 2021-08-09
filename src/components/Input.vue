@@ -47,7 +47,7 @@ export default defineComponent({
       required: true,
     },
     fieldValue: {
-      type: [String],
+      type: [String, Number],
       required: true,
     },
     placeholder: {

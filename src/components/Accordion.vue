@@ -1,19 +1,18 @@
 <template>
-  <div class="w-full px-4 pt-16">
-    <div class="w-full max-w-md p-2 mx-auto bg-white rounded-2xl">
-      <Disclosure v-slot="{ open }">
+  <div class="w-full px-2">
+    <div class="w-full border rounded-md">
+      <Disclosure v-slot="{ open }" :defaultOpen="true">
         <DisclosureButton
           class="
             flex
             justify-between
             w-full
-            px-4
-            p-2
+            p-4
             text-sm
             font-medium
             text-left text-basicBlue
             bg-blue-50
-            rounded-lg
+            rounded-md
             hover:bg-blue-100
             focus:outline-none
             focus-visible:ring
@@ -30,7 +29,9 @@
           </div>
         </DisclosureButton>
         <DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-500">
-          <slot name="content"></slot>
+          <div>
+            <slot name="content"></slot>
+          </div>
         </DisclosurePanel>
       </Disclosure>
     </div>

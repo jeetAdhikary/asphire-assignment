@@ -9,15 +9,23 @@
         placeholder="50000"
         label="Loan Amount"
         inputType="number"
-        :fieldValue="fieldValue"
+        :fieldValue="amount"
         @onChange="onChange"
       />
       <Select
+        name="loanType"
+        :options="loanTypeOptions"
+        :fieldValue="loanType"
+        label="Loan Type"
+        @onChange="onChange"
+      >
+      </Select>
+      <Select
         name="loanTerm"
-        :options="options"
-        :fieldValue="filedValue2"
+        :options="loanTermOptions"
+        :fieldValue="loanTerm"
         label="Loan Term"
-        @onChange="onChagneSelect"
+        @onChange="onChange"
       >
       </Select>
     </div>
@@ -49,8 +57,9 @@
   </form>
 </template>
 <script>
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 // import { OptionsData } from '@/components/types'
+import { useStore } from '@/store'
 import Input from '@/components/Input.vue'
 import Select from '@/components/Select.vue'
 export default defineComponent({
@@ -59,44 +68,63 @@ export default defineComponent({
     Select,
   },
   setup(props, { emit }) {
-    const fieldValue = ref('')
-    const filedValue2 = ref('')
-    const options = ref([
+    const store = useStore()
+    const amount = computed(() => store.state.applyLoanStore.fields.amount)
+    const loanType = computed(() => store.state.applyLoanStore.fields.loanType)
+    const loanTerm = computed(() => store.state.applyLoanStore.fields.loanTerm)
+    const status = computed(() => store.state.applyLoanStore.status)
+    const loanTermOptions = ref([
       {
-        label: '10 Months',
-        value: '10M',
+        label: '10 Weeks',
+        value: '10',
       },
       {
-        label: '20 Months',
-        value: '20M',
+        label: '20 Weeks',
+        value: '20',
       },
       {
-        label: '30 Months',
-        value: '30M',
+        label: '30 Weeks',
+        value: '30',
+      },
+    ])
+    const loanTypeOptions = ref([
+      {
+        label: 'Home Loan',
+        value: 'home-loan',
+      },
+      {
+        label: 'Student Loan',
+        value: 'student-loan',
+      },
+      {
+        label: 'Personal Loan',
+        value: 'personal-loan',
       },
     ])
     const onChange = (payload) => {
-      fieldValue.value = payload.value
-    }
-    const onChagneSelect = (payload) => {
-      console.log(payload)
-      filedValue2.value = payload.value
+      store.dispatch('applyLoanFieldUpdate', payload)
     }
     const onCloseModal = () => {
       emit('onCloseModal')
     }
-    const onSubmitForm = () => {
+    const onSubmitForm = async () => {
       console.log('on Submit')
-      emit('onCloseModal')
+      await store.dispatch('applyLoanSave')
+      if (!status.value.error) {
+        emit('onCloseModal')
+        store.dispatch('fetchLoanList')
+      }
     }
     return {
-      fieldValue,
-      filedValue2,
+      amount,
+      loanType,
+      loanTerm,
       onChange,
-      options,
-      onChagneSelect,
+      loanTermOptions,
+      loanTypeOptions,
       onCloseModal,
       onSubmitForm,
+      status,
     }
   },
 })

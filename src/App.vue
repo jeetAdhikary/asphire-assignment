@@ -1,6 +1,8 @@
 <template>
   <Navbar>
-    <router-view></router-view>
+    <div class="overflow-y-scroll w-full">
+      <router-view></router-view>
+    </div>
   </Navbar>
 </template>
 

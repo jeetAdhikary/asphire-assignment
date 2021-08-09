@@ -1,6 +1,6 @@
 <template>
   <Listbox v-model="value">
-    <div class="relative mt-1 z-30">
+    <div class="relative mt-1">
       <ListboxLabel class="block text-gray-700 text-sm font-bold mb-2">
         {{ label }}
       </ListboxLabel>
@@ -149,7 +149,7 @@ export default defineComponent({
       default: () => [],
     },
     fieldValue: {
-      type: [String, Number],
+      type: Object as () => OptionsData,
       default: null,
     },
     name: {
@@ -171,24 +171,13 @@ export default defineComponent({
   },
   emits: ['onChange'],
   setup(props, { emit }) {
-    const selected = computed(() => {
-      const selectedItem = props.options.find(
-        (item) => item.value === props.fieldValue
-      )
-      if (selectedItem) {
-        return selectedItem
-      } else {
-        return null
-      }
-    })
     const value = computed({
-      get: () => selected.value,
-      set: (data) => emit('onChange', { name: props.name, value: data?.value }),
+      get: () => props.fieldValue,
+      set: (data) => emit('onChange', { name: props.name, value: data }),
     })
 
     return {
       value,
-      selected,
     }
   },
 })

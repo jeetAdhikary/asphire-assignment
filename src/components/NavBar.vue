@@ -1,9 +1,9 @@
 <template>
-  <div class="w-full h-screen">
+  <div class="w-full h-screen overflow-y-hidden">
     <div id="side-navigation" class="flex">
       <aside class="hidden md:block w-1/4 h-screen bg-darkBlue px-5">
         <div class="mt-5">
-          <router-link to="/home" class="block">
+          <router-link to="/" class="block">
             <img
               class="h-10 object-cover"
               src="/src/assets/asphire-logo.png"
