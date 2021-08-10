@@ -50,12 +50,13 @@ export const dataMassaging = (data: { [s: string]: unknown }) => {
 }
 
 export const repaymentDataMassaging = (data: LoanData): LoanData => {
+  const completedPeriods = data.completedPeriods + 1
   return {
     ...data,
     repaidAmount: roundToTwo(data.repaidAmount + data.repaymentAmount),
-    completedPeriods: data.completedPeriods + 1,
+    completedPeriods: completedPeriods,
     id: undefined,
-    status: data.periods === data.completedPeriods ? 'COMPLETED' : data.status,
+    status: data.periods === completedPeriods ? 'COMPLETED' : data.status,
   }
 }
 
