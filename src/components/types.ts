@@ -3,7 +3,8 @@ export interface NavbarData {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon: any
   label: string
-  routerLink: string
+  routerLink?: string
+  active?: boolean
 }
 
 export interface OptionsData {

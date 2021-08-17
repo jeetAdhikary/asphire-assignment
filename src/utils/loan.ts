@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { ApplyLoanField } from '@/loan/store/types'
 import { LoanData } from '@/types'
-import { waitForDebugger } from 'inspector'
 const ROI = 0.0025 // 13% yearly
 
 export const roundToTwo = (num: number): number => {

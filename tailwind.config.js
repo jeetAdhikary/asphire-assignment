@@ -9,6 +9,9 @@ module.exports = {
         basicBlue: '#3359B1',
         lightGreen: '#3ED461',
       },
+      boxShadow: {
+        card: '0 2px 12px 0 rgba(0, 0, 0, 0.14)',
+      },
     },
   },
   variants: {
