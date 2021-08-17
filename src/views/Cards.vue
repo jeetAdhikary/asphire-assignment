@@ -148,7 +148,7 @@
                   "
                 >
                   <div class="flex justify-end">
-                    <img class="h-5" src="/src/assets/logo-l.svg" alt="logo" />
+                    <img class="h-5" src="/src/assets/Logo-l.svg" alt="logo" />
                   </div>
                   <div class="my-4">
                     <h2 class="text-white text-2xl font-bold">Mark Henry</h2>
